@@ -1,9 +1,9 @@
-import React from 'react'
+import './signInPage.css'
 
-const signInPage = () => {
+const SignInPage = () => {
   return (
-    <div>signInPage</div>
+    <div className='signInPage'>SignInPage</div>
   )
 }
 
-export default signInPage
+export default SignInPage
