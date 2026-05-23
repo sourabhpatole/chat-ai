@@ -24,7 +24,7 @@ const ChatList = () => {
       </div>
       <hr />
       <div className="upgrade">
-        <img src="logo.png" alt="" />
+        <img src="/logo.png" alt="" />
         <div className="texts">
           <span>Upgrade to Go AI Pro</span>
           <span>Get Unlimited access to all features</span>
