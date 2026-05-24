@@ -34,7 +34,6 @@ const Upload = ({ setImg }) => {
       const response = await upload({
         file,
         fileName: file.name,
-
         signature,
         expire,
         token,

@@ -28,19 +28,43 @@ app.post("/api/chat", async (req, res) => {
     const { message, imageUrl } = req.body;
 
     console.log(message);
+    console.log(imageUrl);
 
-    if (!message) {
+    if (!message && !imageUrl) {
       return res.status(400).json({
-        error: "Message is required",
+        error: "Message or image required",
       });
     }
 
+    let contents = [];
+
+    // text
+    if (message) {
+      contents.push({
+        text: message,
+      });
+    }
+
+    // image
+    if (imageUrl) {
+      contents.push({
+        fileData: {
+          fileUri: imageUrl,
+          mimeType: "image/jpeg",
+        },
+      });
+    }
+
+    console.log(contents);
+
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: message,
+      model: "gemini-2.5-flash",
+      contents,
     });
 
-    res.json(response.text);
+    return res.json({
+      reply: response.text,
+    });
   } catch (error) {
     console.log(error);
 
@@ -49,7 +73,6 @@ app.post("/api/chat", async (req, res) => {
     });
   }
 });
-
 app.get("/auth", (req, res) => {
   const { token, expire, signature } =
     imagekit.helper.getAuthenticationParameters();
